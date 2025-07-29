@@ -1,3 +1,41 @@
-body{
+body {
+  background-color: lightpink;
+  color: white;
+}
+
+.header {
   margin: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.Page-name {
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+.Page-description {
+  font-size: 2rem;
+  font-style: italic;
+  margin-top: 0;
+}
+
+.dashboard {
+  text-align: center;
+}
+
+.dashboard-welcome {
+  margin-bottom: 0;
+  font-size: 2rem;
+}
+
+.dashboard-description {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.footer {
+  padding: 0%;
+  margin: 0%;
 }
