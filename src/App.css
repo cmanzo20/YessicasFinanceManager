@@ -22,6 +22,17 @@ body {
   margin-top: 0;
 }
 
+@media (max-width: 600px) {
+  .Page-name {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+  }
+
+  .Page-description{
+    font-size: 1.6rem;
+  }
+}
+
 .dashboard {
   text-align: center;
   background-image: url('../public/BulletinBackground.jpg');
@@ -104,6 +115,14 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#incomeFrequency{
+  width: 4rem;
+}
+
+#incomeUnits {
+  width: 5rem
 }
 
 .footer {

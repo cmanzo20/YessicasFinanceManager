@@ -12,12 +12,12 @@ function IncomeForm({ onAddIncome }) {
                     placeholder="Enter your source of income"
                 />
                 <label htmlFor="incomeFrequency">How often are you paid from this source of income?</label>
-                <span>
+                <span id="frequencyAndUnits">
                     Every
                     <input
                         id="incomeFrequency"
                         type="number"
-                        placeholder="Enter payment frequency"
+                        placeholder="Frequency"
                     />
                     <input id = "incomeUnits" list="frequencyUnits"></input>
                     <datalist id="frequencyUnits">

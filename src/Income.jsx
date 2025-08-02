@@ -32,7 +32,7 @@ function Income() {
     <div className="income">
       <h3 className="income-title">Income</h3>
       <p className="income-description">Here, you can see and manage how much money you are currently making</p>
-      <h4>Montly Income: ${incomeList.reduce((sum, item) => sum + item.amount/item.frequency * 28, 0)}</h4> {/* calculates monthly income */}
+      <h4>Montly Income: ${(incomeList.reduce((sum, item) => sum + item.amount/item.frequency * 28, 0)).toFixed(2)}</h4> {/* calculates monthly income */}
       {loading && <p>Loading...</p>}
       {/* {error && <p style={{ color: "black" }}>Error: {error}</p>} CAN DO THIS, I prefer console.log*/}
       {error && console.log(`Error: ${error}`)}
