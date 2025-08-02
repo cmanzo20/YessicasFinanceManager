@@ -1,8 +1,9 @@
+import {daysToString} from "./utils/helperFunctions.js";
 import IncomeForm from "./IncomeForm";
 import { useState, useEffect } from "react";
 
 function Income() {
-  const [incomeList, setIncomeList] = useState([{ id: 1, source: "Job", amount: 500 }, { id: 2, source: "Boyfriend", amount: 20 }]); //test data
+  const [incomeList, setIncomeList] = useState([{ id: 1, source: "Job", frequency: 7, amount: 500 }, { id: 2, source: "Boyfriend", frequency: 28, amount: 20 }]); //test data
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -31,7 +32,7 @@ function Income() {
     <div className="income">
       <h3 className="income-title">Income</h3>
       <p className="income-description">Here, you can see and manage how much money you are currently making</p>
-      <h4>Montly Income: ${incomeList.reduce((sum, item) => sum + item.amount * 4, 0)}</h4> {/* calculates monthly income */}
+      <h4>Montly Income: ${incomeList.reduce((sum, item) => sum + item.amount/item.frequency * 28, 0)}</h4> {/* calculates monthly income */}
       {loading && <p>Loading...</p>}
       {/* {error && <p style={{ color: "black" }}>Error: {error}</p>} CAN DO THIS, I prefer console.log*/}
       {error && console.log(`Error: ${error}`)}
@@ -40,7 +41,7 @@ function Income() {
         <ul>
           {incomeList.map((item) => (
             <li key={item.id}>
-              {item.source}: ${item.amount}
+              {item.source}: ${item.amount + " " + daysToString(item.frequency)}
               <button onClick={() => handleDeleteIncome(item.id)}>Remove</button>
             </li>
           ))}

@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { stringToDays } from "./utils/helperFunctions.js";
 
 function IncomeForm({ onAddIncome }) {
 
@@ -12,11 +11,27 @@ function IncomeForm({ onAddIncome }) {
                     type="text"
                     placeholder="Enter your source of income"
                 />
-                <label htmlFor="weeklyIncome">How much do you earn in a week from this?</label>
+                <label htmlFor="incomeFrequency">How often are you paid from this source of income?</label>
+                <span>
+                    Every
+                    <input
+                        id="incomeFrequency"
+                        type="number"
+                        placeholder="Enter payment frequency"
+                    />
+                    <input id = "incomeUnits" list="frequencyUnits"></input>
+                    <datalist id="frequencyUnits">
+                        <option value="day(s)"></option>
+                        <option value="week(s)"></option>
+                        <option value="month(s)"></option>
+                        <option value="year(s)"></option>
+                    </datalist>
+                </span>
+                <label htmlFor="incomeAmount">How much does this source pay you?</label>
                 <input
-                    id="weeklyIncome"
+                    id="incomeAmount"
                     type="float"
-                    placeholder="Enter your weekly income"
+                    placeholder="Enter your income amount"
                 />
                 <button type="submit">Add Income</button>
             </form>
@@ -26,18 +41,22 @@ function IncomeForm({ onAddIncome }) {
     function handleSubmit(event) {
         event.preventDefault();
         const incomeSource = event.target.incomeSource.value;
-        const weeklyIncome = parseFloat(event.target.weeklyIncome.value) || 0;
+        const incomeAmount = parseFloat(event.target.incomeAmount.value);
+        const incomeUnits = stringToDays(event.target.incomeUnits.value);
+        const incomeFrequency = parseInt(event.target.incomeFrequency.value);
 
-        if (!incomeSource || !weeklyIncome || isNaN(weeklyIncome)) {
-            alert("Please fill out all fields correctly.");
+        if (!incomeSource || !incomeAmount || isNaN(incomeAmount) || incomeAmount <= 0 || !incomeUnits || isNaN(incomeUnits) ||!incomeFrequency || isNaN(incomeFrequency) || incomeFrequency <= 0) {
+            alert("Please fill out all fields with valid data.");
             return;
         }
         const newIncome = {
             source: incomeSource,
-            amount: weeklyIncome,
+            amount: incomeAmount,
+            frequency: incomeFrequency*incomeUnits
         };
         event.target.incomeSource.value = "";
-        event.target.weeklyIncome.value = "";
+        event.target.incomeAmount.value = "";
+        event.target.incomeFrequency.value = "";
         onAddIncome(newIncome);
     };
 }
