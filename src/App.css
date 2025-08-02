@@ -30,6 +30,7 @@ body {
   border-radius: 2rem;
   margin: 4rem;
   padding: 0.5rem;
+  max-width: 100vw;
 }
 
 .dashboard-welcome {
@@ -56,13 +57,12 @@ body {
   background-color: sienna;
   border-radius: 1rem;
   padding: 1rem;
-
 }
 
 @media (max-width: 600px) { /* makes elems fit on mobile */
   .dashboard {
-    margin: 1rem;
-    padding: 0.5rem
+    margin: 0rem;
+    padding: 0.5rem;
   }
 
   .dashboard-grid {
