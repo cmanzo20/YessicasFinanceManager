@@ -59,6 +59,14 @@ body {
   padding: 1rem;
 }
 
+.dashboard-grid > * > h3 { /* title elems of dashboard grid elems */
+  margin-bottom: 0;
+}
+
+.dashboard-grid > * > p{ /* description elems */
+  margin-top: 0;
+}
+
 @media (max-width: 600px) { /* makes elems fit on mobile */
   .dashboard {
     margin: 0rem;
@@ -72,6 +80,30 @@ body {
     padding: 1rem;
     margin: 0.5rem;
   }
+}
+
+.income li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0rem; /* padding vertical + horizontal */
+  border-bottom: 1px solid #eee;
+}
+.income li:last-child {
+  border-bottom: none; /* removes border from last item */
+}
+.income li button {
+  background-color: red;
+  color: white;
+  border: white 1px solid;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .footer {
