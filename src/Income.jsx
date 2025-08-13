@@ -1,11 +1,14 @@
-import {daysToString} from "./utils/helperFunctions.js";
+import { daysToString } from "./utils/helperFunctions.js";
 import IncomeForm from "./IncomeForm";
 import { useState, useEffect } from "react";
+import { periodInDaysMap } from "./utils/helperFunctions.js";
+
 
 function Income() {
   const [incomeList, setIncomeList] = useState([{ id: 1, source: "Job", frequency: 7, amount: 500 }, { id: 2, source: "Boyfriend", frequency: 28, amount: 20 }]); //test data
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [viewPeriod, setViewPeriod] = useState("monthly");
 
   useEffect(() => {
     const fetchIncome = async () => {
@@ -32,7 +35,15 @@ function Income() {
     <div className="income">
       <h3 className="income-title">Income</h3>
       <p className="income-description">Here, you can see and manage how much money you are currently making</p>
-      <h4>Montly Income: ${(incomeList.reduce((sum, item) => sum + item.amount/item.frequency * 28, 0)).toFixed(2)}</h4> {/* calculates monthly income */}
+      <h4>
+        <select
+          id="periodSelect" value={viewPeriod} onChange={(e) => setViewPeriod(e.target.value)}>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+        Income: ${(incomeList.reduce((sum, item) => sum + item.amount / item.frequency * periodInDaysMap[viewPeriod], 0)).toFixed(2)}</h4> {/* calculates monthly income */}
       {loading && <p>Loading...</p>}
       {/* {error && <p style={{ color: "black" }}>Error: {error}</p>} CAN DO THIS, I prefer console.log*/}
       {error && console.log(`Error: ${error}`)}

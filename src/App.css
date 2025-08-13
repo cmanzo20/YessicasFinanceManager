@@ -111,6 +111,24 @@ body {
   cursor: pointer;
 }
 
+.expenses li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0rem; /* padding vertical + horizontal */
+  border-bottom: 1px solid #eee;
+}
+.expenses li:last-child {
+  border-bottom: none; /* removes border from last item */
+}
+.expenses li button {
+  background-color: red;
+  color: white;
+  border: white 1px solid;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -122,6 +140,14 @@ form {
 }
 
 #incomeUnits {
+  width: 5rem
+}
+
+#expenseFrequency{
+  width: 4rem;
+}
+
+#expenseUnits {
   width: 5rem
 }
 
