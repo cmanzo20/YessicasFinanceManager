@@ -54,7 +54,7 @@ function Expenses() {
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
           <option value="yearly">Yearly</option>
-        </select> Expenses: ${expenses.reduce((sum, item) => sum + item.cost/item.frequency *28, 0).toFixed(2)}</h4>
+        </select> Expenses: ${expenses.reduce((sum, item) => sum + item.cost/item.frequency * periodInDaysMap[viewPeriod], 0).toFixed(2)}</h4>
 
       {loading && <p>Loading...</p>}
       {error && console.log(`Error: ${error}`)}
