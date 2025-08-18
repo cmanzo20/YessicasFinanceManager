@@ -1,34 +1,9 @@
-import { useEffect, useState } from "react";
-import ExpensesForm from "./ExpensesForm"; 
-import { periodInDaysMap } from "./utils/helperFunctions";
+import { useState } from "react";
+import ExpensesForm from "./ExpensesForm";
+import { periodInDaysMap, daysToString } from "./utils/helperFunctions";
 
-function Expenses() {
-  const [expenses, setExpenses] = useState([
-    { id: 1, source: "Gas", cost: 100, frequency: 7 },
-    { id: 2, source: "Groceries", cost: 250, frequency: 14 }
-  ]); // test data
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function Expenses({ expenses, setExpenses, loading, error }) {
   const [viewPeriod, setViewPeriod] = useState("monthly");
-
-  useEffect(() => {
-    const fetchExpenses = async () => {
-      try {
-        const response = await fetch(`${process.env.BACKEND_URL}/expenses`);
-        if (!response.ok) {
-          throw new Error("Error fetching expenses");
-        }
-        const data = await response.json();
-        setExpenses(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchExpenses();
-  }, []);
 
   function handleAddExpense(newExpense) {
     const id = expenses.length > 0 ? Math.max(...expenses.map(e => e.id)) + 1 : 1;
@@ -48,22 +23,28 @@ function Expenses() {
     <div className="expenses">
       <h3 className="expenses-title">Expenses</h3>
       <p className="expenses-description">Here, you can see and manage your expenses</p>
-      <h4><select
-          id="periodSelect" value={viewPeriod} onChange={(e) => setViewPeriod(e.target.value)}>
+      <h4>
+        <select
+          id="periodSelect"
+          value={viewPeriod}
+          onChange={(e) => setViewPeriod(e.target.value)}
+        >
           <option value="daily">Daily</option>
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
           <option value="yearly">Yearly</option>
-        </select> Expenses: ${expenses.reduce((sum, item) => sum + item.cost/item.frequency * periodInDaysMap[viewPeriod], 0).toFixed(2)}</h4>
+        </select> Expenses: $
+        {expenses ? expenses.reduce((sum, item) => sum + (item.cost / item.frequency) * periodInDaysMap[viewPeriod], 0).toFixed(2) : "0.00"}
+      </h4>
 
       {loading && <p>Loading...</p>}
-      {error && console.log(`Error: ${error}`)}
+      {error && console.error(`Error: ${error}`)}
 
       {!loading && (
-        <ul>
+        <ul className="expenses-List">
           {expenses.map(item => (
             <li key={item.id}>
-              {item.source}: ${item.cost}
+              {item.source}: ${item.cost} {daysToString(item.frequency)}
               <button onClick={() => handleDeleteExpense(item.id)}>Remove</button>
             </li>
           ))}

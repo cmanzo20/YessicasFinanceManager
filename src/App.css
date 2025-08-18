@@ -116,6 +116,7 @@ body {
   justify-content: space-between;
   padding: 0.5rem 0rem; /* padding vertical + horizontal */
   border-bottom: 1px solid #eee;
+  text-align: left;
 }
 .expenses li:last-child {
   border-bottom: none; /* removes border from last item */
@@ -149,6 +150,16 @@ form {
 
 #expenseUnits {
   width: 5rem
+}
+
+.netIncome-advice {
+  max-width: 20rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.netIncome-List{
+  text-align: left;
 }
 
 .footer {

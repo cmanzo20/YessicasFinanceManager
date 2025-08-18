@@ -30,6 +30,13 @@ export function stringToDays(unit) {    //currently not used due to refactoring,
     return null;
 }
 
+export const periodtoUnitMap = {
+    daily: "day",
+    weekly: "week",
+    monthly: "month",
+    yearly: "year"
+}
+
 export const periodInDaysMap = { //map for displaying income over different periods
     daily: 1,
     weekly: 7,
